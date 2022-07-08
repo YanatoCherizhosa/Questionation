@@ -6,5 +6,3 @@ public class Exit : Button
 		GetTree().Quit();
 	}
 }
-
-
