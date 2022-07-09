@@ -1,16 +1,16 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://Sprites/Hearts.png" type="Texture" id=1]
 [ext_resource path="res://Scripts/HealthBar.gd" type="Script" id=2]
 [ext_resource path="res://Scripts/DataLoad.gd" type="Script" id=3]
+[ext_resource path="res://Sprites/Heart.png" type="Texture" id=4]
+[ext_resource path="res://Fonts/VinnitsyaSansRegH3.tres" type="DynamicFont" id=5]
+[ext_resource path="res://Fonts/VinnitsyaSansRegH5.tres" type="DynamicFont" id=6]
 
 [node name="Control" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 script = ExtResource( 3 )
-__meta__ = {
-"_edit_lock_": true
-}
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 anchor_right = 1.0
@@ -21,11 +21,103 @@ margin_right = -20.0
 margin_bottom = -20.0
 
 [node name="HealthBar" type="TextureRect" parent="MarginContainer"]
-margin_right = 384.0
-margin_bottom = 128.0
-rect_min_size = Vector2( 128, 128 )
+margin_right = 64.0
+margin_bottom = 64.0
+rect_min_size = Vector2( 64, 64 )
 size_flags_horizontal = 0
 size_flags_vertical = 0
 texture = ExtResource( 1 )
+expand = true
 stretch_mode = 2
 script = ExtResource( 2 )
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+margin_right = 984.0
+margin_bottom = 560.0
+
+[node name="HBoxHearts" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
+visible = false
+margin_right = 984.0
+margin_bottom = 32.0
+size_flags_vertical = 0
+
+[node name="Heart1" type="TextureRect" parent="MarginContainer/VBoxContainer/HBoxHearts"]
+margin_right = 32.0
+margin_bottom = 32.0
+size_flags_vertical = 0
+texture = ExtResource( 4 )
+
+[node name="Heart2" type="TextureRect" parent="MarginContainer/VBoxContainer/HBoxHearts"]
+margin_left = 36.0
+margin_right = 68.0
+margin_bottom = 32.0
+size_flags_vertical = 0
+texture = ExtResource( 4 )
+
+[node name="Heart3" type="TextureRect" parent="MarginContainer/VBoxContainer/HBoxHearts"]
+margin_left = 72.0
+margin_right = 104.0
+margin_bottom = 32.0
+size_flags_vertical = 0
+texture = ExtResource( 4 )
+
+[node name="VBoxQuestion" type="VBoxContainer" parent="MarginContainer/VBoxContainer"]
+margin_left = 142.0
+margin_right = 842.0
+margin_bottom = 32.0
+rect_min_size = Vector2( 500, 0 )
+size_flags_horizontal = 4
+size_flags_vertical = 0
+
+[node name="Question" type="Label" parent="MarginContainer/VBoxContainer/VBoxQuestion"]
+margin_right = 700.0
+margin_bottom = 32.0
+rect_min_size = Vector2( 700, 0 )
+size_flags_horizontal = 4
+custom_fonts/font = ExtResource( 5 )
+text = "Вопрос номер один?"
+align = 1
+autowrap = true
+
+[node name="VBoxAnswers" type="VBoxContainer" parent="MarginContainer/VBoxContainer"]
+margin_left = 342.0
+margin_top = 36.0
+margin_right = 642.0
+margin_bottom = 560.0
+rect_min_size = Vector2( 300, 0 )
+size_flags_horizontal = 4
+size_flags_vertical = 3
+custom_constants/separation = 20
+alignment = 1
+
+[node name="Answer1" type="Button" parent="MarginContainer/VBoxContainer/VBoxAnswers"]
+margin_top = 152.0
+margin_right = 300.0
+margin_bottom = 192.0
+rect_min_size = Vector2( 0, 40 )
+custom_fonts/font = ExtResource( 6 )
+text = "Ответ 1"
+
+[node name="Answer2" type="Button" parent="MarginContainer/VBoxContainer/VBoxAnswers"]
+margin_top = 212.0
+margin_right = 300.0
+margin_bottom = 252.0
+rect_min_size = Vector2( 0, 40 )
+custom_fonts/font = ExtResource( 6 )
+text = "Ответ 2"
+
+[node name="Answer3" type="Button" parent="MarginContainer/VBoxContainer/VBoxAnswers"]
+margin_top = 272.0
+margin_right = 300.0
+margin_bottom = 312.0
+rect_min_size = Vector2( 0, 40 )
+custom_fonts/font = ExtResource( 6 )
+text = "Ответ 3"
+
+[node name="Answer4" type="Button" parent="MarginContainer/VBoxContainer/VBoxAnswers"]
+margin_top = 332.0
+margin_right = 300.0
+margin_bottom = 372.0
+rect_min_size = Vector2( 0, 40 )
+custom_fonts/font = ExtResource( 6 )
+text = "Ответ 4"

@@ -9,7 +9,7 @@ func _ready():
 	db.path = db_path
 	db.open_db()
 	var tableName = "questions"
-	var dict : Dictionary = Dictionary()
+	#var dict : Dictionary = Dictionary()
 	db.query("select * from"+tableName+";")
-	var result = db.query_result_by_reference()
-
+	#var result = db.query_result_by_reference()
+	
