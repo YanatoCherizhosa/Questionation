@@ -7,7 +7,9 @@ var db
 var db_path = "res://Databases/main.db"
 var massive
 var playerHealth
-
+var randomQuestions = []
+var randomAnswers = []
+var qnumber = 0
 
 func _ready():
 	massive = get_node("/root/Global").question_massive
@@ -19,18 +21,20 @@ func _ready():
 		pass 
 	else:
 		GetQuestionsFromDB();
-
+	
+	for i in massive.size():
+		randomQuestions.append(int(i))
+	randomQuestions.shuffle()
+	for i in 4:
+		randomAnswers.append(int(i))
+	randomAnswers.shuffle()
+	
 	for i in answersButtonGroup.get_buttons():
 		i.connect("pressed", self, "answerButtonUp")
-		
-#	print("MASSIVE: ") 
-#	print(massive)
-#	print("\n")
-#	print("GLOBAL: ")
-#	print(get_node("/root/Global").question_massive)
-#	print("\n")
+	print(randomAnswers)
+	print("\n")
 
-	CreateQuestion()
+	CreateQuestion(qnumber)
 
 func GetQuestionsFromDB():
 	db = SQLite.new()
@@ -45,57 +49,40 @@ func GetQuestionsFromDB():
 		var quest_dict = {
 			"id" : i,
 			"quest" : db.query_result[i]["quest"],
-			"true_answer" : [db.query_result[i]["true_answer"],0],
-			"w1" : [db.query_result[i]["w1"],1],
-			"w2" : [db.query_result[i]["w2"],1],
-			"w3" : [db.query_result[i]["w3"],1],
+			0: [db.query_result[i]["true_answer"],0],
+			1 : [db.query_result[i]["w1"],1],
+			2 : [db.query_result[i]["w2"],1],
+			3 : [db.query_result[i]["w3"],1],
 		}
 		massive.append(quest_dict)
 	
-func CreateQuestion():
-	var rng = RandomNumberGenerator.new()
-	rng.randomize()
-	var randq = rng.randi_range(0, massive.size()-1)
-	get_node("MarginContainer/VBoxContainer/VBoxQuestion/Question").text = massive[randq]["quest"]
-	
-	get_node("MarginContainer/VBoxContainer/VBoxAnswers/Answer1").text = massive[randq]["true_answer"][0]
-	get_node("MarginContainer/VBoxContainer/VBoxAnswers/Answer1").hp_influence = int(massive[randq]["true_answer"][1])
-	print(get_node("MarginContainer/VBoxContainer/VBoxAnswers/Answer1").hp_influence)
-	
-	get_node("MarginContainer/VBoxContainer/VBoxAnswers/Answer2").text = massive[randq]["w1"][0]
-	get_node("MarginContainer/VBoxContainer/VBoxAnswers/Answer2").hp_influence = int(massive[randq]["w1"][1])
-	print(get_node("MarginContainer/VBoxContainer/VBoxAnswers/Answer2").hp_influence)
-	
-	get_node("MarginContainer/VBoxContainer/VBoxAnswers/Answer3").text = massive[randq]["w2"][0]
-	get_node("MarginContainer/VBoxContainer/VBoxAnswers/Answer3").hp_influence = int(massive[randq]["w2"][1])
-	print(get_node("MarginContainer/VBoxContainer/VBoxAnswers/Answer3").hp_influence)
-	
-	get_node("MarginContainer/VBoxContainer/VBoxAnswers/Answer4").text = massive[randq]["w3"][0]
-	get_node("MarginContainer/VBoxContainer/VBoxAnswers/Answer4").hp_influence = int(massive[randq]["w3"][1])
-	print(get_node("MarginContainer/VBoxContainer/VBoxAnswers/Answer4").hp_influence)
-
-
+func CreateQuestion(var randQ):
+	get_node("MarginContainer/VBoxContainer/VBoxQuestion/Question").text = massive[randomQuestions[randQ]]["quest"]
+	for i in 4:
+		answersButtonGroup.get_buttons()[i].text = massive[randomQuestions[randQ]][randomAnswers[i]][0]
+		answersButtonGroup.get_buttons()[i].hp_influence = int(massive[randomQuestions[randQ]][randomAnswers[i]][1])
+				
 func answerButtonUp():
+	print("HP influence: "+str(answersButtonGroup.get_pressed_button().hp_influence))
 	print("Player bi HP: "+ str(get_node("/root/Global").playerHealth))
+	
 	get_node("/root/Global").playerHealth = get_node("/root/Global").playerHealth - answersButtonGroup.get_pressed_button().hp_influence
+	
+	print("HP influence: "+str(answersButtonGroup.get_pressed_button().hp_influence))
 	print("Player ai HP: "+ str(get_node("/root/Global").playerHealth))
-	get_node("MarginContainer/VBoxContainer/HealthBar").rect_size = Vector2(64 * float(get_node("/root/Global").playerHealth), 64)
-	print(answersButtonGroup.get_pressed_button())
-	CreateQuestion()
+	get_node("MarginContainer/VBoxContainer/HealthBar").rect_size = Vector2(64 * get_node("/root/Global").playerHealth, 64)
+
+	if qnumber >= randomQuestions.size()-1:
+		print("Победа!")
+		qnumber = 0
+	else:
+		qnumber+=1
+		print("Next Question :"+str(qnumber))
+		if qnumber < randomQuestions.size():
+			randomAnswers.shuffle()
+			CreateQuestion(qnumber)
 
 func _on_GoBack_button_up():
 	if get_tree().change_scene("res://Scenes/Menu.tscn") != OK:
 		print("Error occured when trying to switch to the Menu.tscn")
-		
-		
-	# Remove the current level
-	#var root = get_tree().get_root()
-	#level = root.get_node()
-	#root.remove_child(level)
-	#level.call_deferred("free")
 
-	# Add the next level
-	#var next_level_resource = load("res://path/Scenes/Game.tscn")
-	
-	#var next_level = next_level_resource.instance()
-	#root.add_child(next_level)

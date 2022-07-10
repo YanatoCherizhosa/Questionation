@@ -29,9 +29,8 @@ margin_bottom = 560.0
 custom_constants/separation = 10
 
 [node name="HealthBar" type="TextureRect" parent="MarginContainer/VBoxContainer"]
-margin_right = 64.0
 margin_bottom = 64.0
-rect_min_size = Vector2( 64, 64 )
+rect_min_size = Vector2( 0, 64 )
 size_flags_horizontal = 0
 size_flags_vertical = 0
 texture = ExtResource( 1 )
@@ -41,8 +40,9 @@ script = ExtResource( 2 )
 
 [node name="HBoxHearts" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
 visible = false
+margin_top = 74.0
 margin_right = 984.0
-margin_bottom = 32.0
+margin_bottom = 106.0
 size_flags_vertical = 0
 
 [node name="Heart1" type="TextureRect" parent="MarginContainer/VBoxContainer/HBoxHearts"]
