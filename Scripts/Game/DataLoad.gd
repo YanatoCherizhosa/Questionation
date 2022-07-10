@@ -16,12 +16,14 @@ func _ready():
 	playerHealth = get_node("/root/Global").playerHealth
 	print("Player HP: "+ str(get_node("/root/Global").playerHealth))
 
-	#Load questions if question massive is empty
+	#load questions if question massive is empty
 	if massive.size() > 0:
 		pass 
 	else:
 		GetQuestionsFromDB();
 	
+	#creating random arrays of questions and answers
+	randomize() #randomize seed using a number, based on time
 	for i in massive.size():
 		randomQuestions.append(int(i))
 	randomQuestions.shuffle()
@@ -29,11 +31,11 @@ func _ready():
 		randomAnswers.append(int(i))
 	randomAnswers.shuffle()
 	
+	#bind signal to buttons
 	for i in answersButtonGroup.get_buttons():
-		i.connect("pressed", self, "answerButtonUp")
-	print(randomAnswers)
-	print("\n")
-
+		i.connect("pressed", self, "answerButtonPressed")
+		
+	#create first question
 	CreateQuestion(qnumber)
 
 func GetQuestionsFromDB():
@@ -45,6 +47,7 @@ func GetQuestionsFromDB():
 	db.query("SELECT question as quest, trueanswer as true_answer, wrong1 as w1, " +
 	"wrong2 as w2, wrong3 as w3 FROM "+tableName+";")
 	
+	#filling the data dictionary
 	for i in range(0, db.query_result.size()):
 		var quest_dict = {
 			"id" : i,
@@ -62,18 +65,20 @@ func CreateQuestion(var randQ):
 		answersButtonGroup.get_buttons()[i].text = massive[randomQuestions[randQ]][randomAnswers[i]][0]
 		answersButtonGroup.get_buttons()[i].hp_influence = int(massive[randomQuestions[randQ]][randomAnswers[i]][1])
 				
-func answerButtonUp():
+func answerButtonPressed():
+	#changing HP by button hp_influence value
 	print("HP influence: "+str(answersButtonGroup.get_pressed_button().hp_influence))
 	print("Player bi HP: "+ str(get_node("/root/Global").playerHealth))
-	
 	get_node("/root/Global").playerHealth = get_node("/root/Global").playerHealth - answersButtonGroup.get_pressed_button().hp_influence
 	
 	print("HP influence: "+str(answersButtonGroup.get_pressed_button().hp_influence))
 	print("Player ai HP: "+ str(get_node("/root/Global").playerHealth))
-	get_node("MarginContainer/VBoxContainer/HealthBar").rect_size = Vector2(64 * get_node("/root/Global").playerHealth, 64)
+	get_node("MarginContainer/VBoxContainer/HPBar").value = get_node("/root/Global").playerHealth
 
+	#if we have questions display them, else you win!
 	if qnumber >= randomQuestions.size()-1:
 		print("Победа!")
+		get_node("/root/Global").playerHealth = 3
 		qnumber = 0
 	else:
 		qnumber+=1
