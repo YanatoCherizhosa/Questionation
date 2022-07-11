@@ -23,8 +23,7 @@ func _ready():
 		GetQuestionsFromDB();
 	
 	CreateNewQuiz()
-	print("Start quiz: "+str(randomQuestions))
-	#bind signal to buttons
+	#bind signal to answer buttons
 	for i in answersButtonGroup.get_buttons():
 		i.connect("pressed", self, "answerButtonPressed")
 
@@ -50,6 +49,9 @@ func GetQuestionsFromDB():
 		massive.append(quest_dict)
 
 func CreateNewQuiz():
+	qnumber = 0
+	get_node("/root/Global").playerHealth = 3
+	get_node("MarginContainer/VBoxContainer/HPBar").value = get_node("/root/Global").playerHealth
 	randomQuestions.clear()
 	randomAnswers.clear()
 	#creating random arrays of questions and answers
@@ -63,7 +65,7 @@ func CreateNewQuiz():
 	CreateQuestion(qnumber)
 	
 func CreateQuestion(var randQ):
-	get_node("MarginContainer/VBoxContainer/VBoxQuestion/Question").text = massive[randomQuestions[randQ]]["quest"]
+	get_node("MarginContainer/VBoxContainer/VBoxQuestion/Question").text = "Вопрос №"+str(qnumber+1)+": " + massive[randomQuestions[randQ]]["quest"]
 	for i in 4:
 		answersButtonGroup.get_buttons()[i].text = massive[randomQuestions[randQ]][randomAnswers[i]][0]
 		answersButtonGroup.get_buttons()[i].hp_influence = int(massive[randomQuestions[randQ]][randomAnswers[i]][1])
@@ -72,25 +74,49 @@ func answerButtonPressed():
 	get_node("/root/Global").playerHealth = get_node("/root/Global").playerHealth - answersButtonGroup.get_pressed_button().hp_influence
 	get_node("MarginContainer/VBoxContainer/HPBar").value = get_node("/root/Global").playerHealth
 	print("Player ai HP: "+ str(get_node("/root/Global").playerHealth))
-	
-	#if we have questions display them, else you win!
-	if qnumber >= randomQuestions.size()-1:
-		print("Победа!")
-		get_node("/root/Global").playerHealth = 3
-		
-		qnumber = 0
-		CreateNewQuiz()
-		print("New quiz: "+str(randomQuestions))
+	if get_node("/root/Global").playerHealth < 1:
+		get_node("CanvasLayer/Pause").visible = true
+		for node in get_tree().get_nodes_in_group("Lose"):
+			node.visible = true
 	else:
-		qnumber+=1
-		print("Next Question :"+str(qnumber))
-		if qnumber < randomQuestions.size():
-			randomAnswers.shuffle()
-			CreateQuestion(qnumber)
-
-func _on_GoBack_button_up():
+		if qnumber >= randomQuestions.size()-1:
+			print("Победа!")
+			get_tree().current_scene.pause_mode = true
+			get_node("CanvasLayer/Pause").visible = true
+			get_node("CanvasLayer/Pause/Background/Menues/WinMenu/AnsCount").text = "Вы ответили на "+str(randomQuestions.size()-(3-get_node("/root/Global").playerHealth))+" вопросов"
+			for node in get_tree().get_nodes_in_group("Win"):
+				node.visible = true
+			get_node("/root/Global").playerHealth = 3
+			#CreateNewQuiz()
+		else:
+			qnumber+=1
+			if qnumber < randomQuestions.size():
+				randomAnswers.shuffle()
+				CreateQuestion(qnumber)
+			
+func _on_Menu_pressed():
+	get_tree().paused = true
+	get_node("CanvasLayer/Pause").visible = true
+	for node in get_tree().get_nodes_in_group("Pause"):
+		node.visible = true
+				
+func _on_Continue_pressed():
+	get_tree().paused = false
+	get_node("CanvasLayer/Pause").visible = false
+	for node in get_tree().get_nodes_in_group("AllPause"):
+		node.visible = false
+	
+func _on_Restart_pressed():
+	get_tree().paused = false
+	get_node("CanvasLayer/Pause").visible = false
+	for node in get_tree().get_nodes_in_group("AllPause"):
+		node.visible = false
+	CreateNewQuiz()
+	
+func _on_Exit_pressed():
+	get_tree().paused = false
+	for node in get_tree().get_nodes_in_group("AllPause"):
+		node.visible = false
 	get_node("/root/Global/").playerHealth = 3
 	if get_tree().change_scene("res://Scenes/Menu.tscn") != OK:
 		print("Error occured when trying to switch to the Menu.tscn")
-		
-
