@@ -4,7 +4,7 @@ export (ButtonGroup) var answersButtonGroup
 
 const SQLite = preload("res://addons/godot-sqlite/bin/gdsqlite.gdns")
 var db
-var db_path = "res://Databases/main.db"
+var db_path = "res://Databases/main.db" #"res://Databases/main.db"
 var massive
 var playerHealth
 var randomQuestions = []
@@ -29,6 +29,7 @@ func _ready():
 
 func GetQuestionsFromDB():
 	db = SQLite.new()
+	db.read_only = true
 	db.path = db_path
 	db.open_db()
 	
@@ -51,7 +52,8 @@ func GetQuestionsFromDB():
 func CreateNewQuiz():
 	qnumber = 0
 	get_node("/root/Global").playerHealth = 3
-	get_node("MarginContainer/VBoxContainer/HPBar").value = get_node("/root/Global").playerHealth
+	get_tree().get_nodes_in_group("HPBar")[0].value = get_node("/root/Global").playerHealth
+	#get_node("MarginContainer/HPBar").value = get_node("/root/Global").playerHealth
 	randomQuestions.clear()
 	randomAnswers.clear()
 	#creating random arrays of questions and answers
@@ -62,17 +64,19 @@ func CreateNewQuiz():
 	for i in 4:
 		randomAnswers.append(int(i))
 	randomAnswers.shuffle()
+	
 	CreateQuestion(qnumber)
 	
 func CreateQuestion(var randQ):
-	get_node("MarginContainer/VBoxContainer/VBoxQuestion/Question").text = "Вопрос №"+str(qnumber+1)+": " + massive[randomQuestions[randQ]]["quest"]
+	get_node("MarginContainer/VBoxContainer/VBoxQuestion/Question/").text = "Вопрос №"+str(qnumber+1)+": " + massive[randomQuestions[randQ]]["quest"]
 	for i in 4:
 		answersButtonGroup.get_buttons()[i].text = massive[randomQuestions[randQ]][randomAnswers[i]][0]
 		answersButtonGroup.get_buttons()[i].hp_influence = int(massive[randomQuestions[randQ]][randomAnswers[i]][1])
 				
 func answerButtonPressed():
 	get_node("/root/Global").playerHealth = get_node("/root/Global").playerHealth - answersButtonGroup.get_pressed_button().hp_influence
-	get_node("MarginContainer/VBoxContainer/HPBar").value = get_node("/root/Global").playerHealth
+	get_tree().get_nodes_in_group("HPBar")[0].value = get_node("/root/Global").playerHealth
+	#get_node("MarginContainer/HPBar").value = get_node("/root/Global").playerHealth
 	print("Player ai HP: "+ str(get_node("/root/Global").playerHealth))
 	if get_node("/root/Global").playerHealth < 1:
 		get_node("CanvasLayer/Pause").visible = true
@@ -81,6 +85,7 @@ func answerButtonPressed():
 	else:
 		if qnumber >= randomQuestions.size()-1:
 			print("Победа!")
+			get_tree().paused = true
 			get_tree().current_scene.pause_mode = true
 			get_node("CanvasLayer/Pause").visible = true
 			get_node("CanvasLayer/Pause/Background/Menues/WinMenu/AnsCount").text = "Вы ответили на "+str(randomQuestions.size()-(3-get_node("/root/Global").playerHealth))+" вопросов"
