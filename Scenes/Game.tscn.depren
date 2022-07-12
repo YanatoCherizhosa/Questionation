@@ -1,7 +1,7 @@
 [gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://Animations/HPBar/HPBarAnimation.tres" type="Texture" id=2]
-[ext_resource path="res://Scripts/Game/DataLoad.gd" type="Script" id=3]
+[ext_resource path="res://Scripts/Game/GameController.gd" type="Script" id=3]
 [ext_resource path="res://Scripts/Game/Pause.gd" type="Script" id=4]
 [ext_resource path="res://Fonts/VinnitsyaSansRegH3.tres" type="DynamicFont" id=5]
 [ext_resource path="res://Fonts/VinnitsyaSansRegH5.tres" type="DynamicFont" id=6]
@@ -42,7 +42,7 @@ margin_bottom = -20.0
 
 [node name="TrueAnswers" type="Label" parent="MarginContainer"]
 margin_right = 246.0
-margin_bottom = 24.0
+margin_bottom = 32.0
 size_flags_horizontal = 0
 size_flags_vertical = 0
 custom_fonts/font = ExtResource( 14 )
@@ -199,6 +199,7 @@ layer = 2
 
 [node name="Pause" type="Control" parent="CanvasLayer"]
 pause_mode = 2
+visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 script = ExtResource( 4 )
@@ -206,30 +207,28 @@ script = ExtResource( 4 )
 [node name="Background" type="ColorRect" parent="CanvasLayer/Pause"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-color = Color( 0, 0, 0, 0.513726 )
+color = Color( 0, 0, 0, 0.666667 )
 
-[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/Pause"]
-anchor_right = 1.0
-anchor_bottom = 1.0
-
-[node name="Menues" type="VBoxContainer" parent="CanvasLayer/Pause/MarginContainer"]
-margin_left = 212.0
-margin_top = 300.0
-margin_right = 812.0
-margin_bottom = 300.0
-rect_min_size = Vector2( 600, 0 )
-size_flags_horizontal = 4
-size_flags_vertical = 4
+[node name="Menues" type="VBoxContainer" parent="CanvasLayer/Pause/Background"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -300.0
+margin_top = -182.0
+margin_right = 300.0
+margin_bottom = 182.0
+rect_min_size = Vector2( 600, 300 )
 custom_constants/separation = 20
 
-[node name="WinMenu" type="VBoxContainer" parent="CanvasLayer/Pause/MarginContainer/Menues" groups=["AllPause", "Win"]]
+[node name="WinMenu" type="VBoxContainer" parent="CanvasLayer/Pause/Background/Menues" groups=["AllPause", "Win"]]
 visible = false
 margin_right = 600.0
 margin_bottom = 120.0
 size_flags_horizontal = 5
 custom_constants/separation = 20
 
-[node name="Congrats" type="Label" parent="CanvasLayer/Pause/MarginContainer/Menues/WinMenu"]
+[node name="Congrats" type="Label" parent="CanvasLayer/Pause/Background/Menues/WinMenu"]
 margin_right = 600.0
 margin_bottom = 50.0
 rect_min_size = Vector2( 0, 50 )
@@ -239,14 +238,14 @@ text = "Победа!"
 align = 1
 valign = 1
 
-[node name="ColorRect" type="ColorRect" parent="CanvasLayer/Pause/MarginContainer/Menues/WinMenu/Congrats"]
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer/Pause/Background/Menues/WinMenu/Congrats"]
 show_behind_parent = true
 anchor_right = 1.0
 anchor_bottom = 1.0
 rect_min_size = Vector2( 0, 50 )
 color = Color( 0.121569, 0.117647, 0.176471, 1 )
 
-[node name="AnsCount" type="Label" parent="CanvasLayer/Pause/MarginContainer/Menues/WinMenu"]
+[node name="AnsCount" type="Label" parent="CanvasLayer/Pause/Background/Menues/WinMenu"]
 margin_top = 70.0
 margin_right = 600.0
 margin_bottom = 120.0
@@ -259,14 +258,14 @@ align = 1
 valign = 1
 autowrap = true
 
-[node name="ColorRect" type="ColorRect" parent="CanvasLayer/Pause/MarginContainer/Menues/WinMenu/AnsCount"]
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer/Pause/Background/Menues/WinMenu/AnsCount"]
 show_behind_parent = true
 anchor_right = 1.0
 anchor_bottom = 1.0
 rect_min_size = Vector2( 0, 50 )
 color = Color( 0.121569, 0.117647, 0.176471, 1 )
 
-[node name="LoseMenu" type="VBoxContainer" parent="CanvasLayer/Pause/MarginContainer/Menues" groups=["AllPause", "Lose"]]
+[node name="LoseMenu" type="VBoxContainer" parent="CanvasLayer/Pause/Background/Menues" groups=["AllPause", "Lose"]]
 visible = false
 margin_left = 180.0
 margin_top = 140.0
@@ -276,7 +275,7 @@ rect_min_size = Vector2( 240, 0 )
 size_flags_horizontal = 4
 custom_constants/separation = 20
 
-[node name="Lose" type="Label" parent="CanvasLayer/Pause/MarginContainer/Menues/LoseMenu"]
+[node name="Lose" type="Label" parent="CanvasLayer/Pause/Background/Menues/LoseMenu"]
 margin_right = 240.0
 margin_bottom = 50.0
 rect_min_size = Vector2( 0, 50 )
@@ -286,46 +285,41 @@ text = " Вы проиграли "
 align = 1
 valign = 1
 
-[node name="ColorRect" type="ColorRect" parent="CanvasLayer/Pause/MarginContainer/Menues/LoseMenu/Lose"]
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer/Pause/Background/Menues/LoseMenu/Lose"]
 show_behind_parent = true
 anchor_right = 1.0
 anchor_bottom = 1.0
 rect_min_size = Vector2( 240, 50 )
 color = Color( 0.129412, 0.129412, 0.129412, 1 )
 
-[node name="PauseButtons" type="VBoxContainer" parent="CanvasLayer/Pause/MarginContainer/Menues"]
-margin_left = 300.0
-margin_right = 300.0
-size_flags_horizontal = 4
-size_flags_vertical = 0
-custom_constants/separation = 10
-
-[node name="Continue" type="Button" parent="CanvasLayer/Pause/MarginContainer/Menues/PauseButtons" groups=["AllPause", "Pause"]]
+[node name="Continue" type="Button" parent="CanvasLayer/Pause/Background/Menues" groups=["AllPause", "Pause"]]
 visible = false
-margin_right = 240.0
-margin_bottom = 38.0
+margin_left = 180.0
+margin_top = 210.0
+margin_right = 420.0
+margin_bottom = 248.0
 rect_min_size = Vector2( 240, 0 )
 focus_mode = 0
 size_flags_horizontal = 4
 custom_fonts/font = ExtResource( 5 )
 text = "Продолжить"
 
-[node name="Restart" type="Button" parent="CanvasLayer/Pause/MarginContainer/Menues/PauseButtons" groups=["AllPause", "Lose", "Pause", "Win"]]
-visible = false
-margin_top = 48.0
-margin_right = 240.0
-margin_bottom = 86.0
+[node name="Restart" type="Button" parent="CanvasLayer/Pause/Background/Menues" groups=["AllPause", "Lose", "Pause", "Win"]]
+margin_left = 180.0
+margin_top = 268.0
+margin_right = 420.0
+margin_bottom = 306.0
 rect_min_size = Vector2( 240, 0 )
 focus_mode = 0
 size_flags_horizontal = 4
 custom_fonts/font = ExtResource( 5 )
 text = "Заново"
 
-[node name="Exit" type="Button" parent="CanvasLayer/Pause/MarginContainer/Menues/PauseButtons" groups=["AllPause", "Lose", "Pause", "Win"]]
-visible = false
-margin_top = 96.0
-margin_right = 240.0
-margin_bottom = 134.0
+[node name="Exit" type="Button" parent="CanvasLayer/Pause/Background/Menues" groups=["AllPause", "Lose", "Pause", "Win"]]
+margin_left = 180.0
+margin_top = 326.0
+margin_right = 420.0
+margin_bottom = 364.0
 rect_min_size = Vector2( 240, 0 )
 focus_mode = 0
 size_flags_horizontal = 4
@@ -333,6 +327,6 @@ custom_fonts/font = ExtResource( 5 )
 text = "Выйти"
 
 [connection signal="pressed" from="MarginContainer/Menu" to="." method="_on_Menu_pressed"]
-[connection signal="pressed" from="CanvasLayer/Pause/MarginContainer/Menues/PauseButtons/Continue" to="." method="_on_Continue_pressed"]
-[connection signal="pressed" from="CanvasLayer/Pause/MarginContainer/Menues/PauseButtons/Restart" to="." method="_on_Restart_pressed"]
-[connection signal="pressed" from="CanvasLayer/Pause/MarginContainer/Menues/PauseButtons/Exit" to="." method="_on_Exit_pressed"]
+[connection signal="pressed" from="CanvasLayer/Pause/Background/Menues/Continue" to="." method="_on_Continue_pressed"]
+[connection signal="pressed" from="CanvasLayer/Pause/Background/Menues/Restart" to="." method="_on_Restart_pressed"]
+[connection signal="pressed" from="CanvasLayer/Pause/Background/Menues/Exit" to="." method="_on_Exit_pressed"]

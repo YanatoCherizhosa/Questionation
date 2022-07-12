@@ -17,7 +17,8 @@ config/icon="res://Animations/AnswerButtonIcons/ButtonIcons_Animation 1_0.png"
 
 [autoload]
 
-Global="*res://Scripts/Global.gd"
+Data="*res://Scripts/Data.gd"
+Player="*res://Scripts/Player.gd"
 
 [editor_plugins]
 
