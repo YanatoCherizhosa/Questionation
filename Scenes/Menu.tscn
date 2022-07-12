@@ -1,24 +1,47 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://Fonts/VinnitsyaSansRegH2.tres" type="DynamicFont" id=1]
 [ext_resource path="res://Fonts/VinnitsyaSansRegH3.tres" type="DynamicFont" id=2]
 [ext_resource path="res://Scripts/Menu/Exit.gd" type="Script" id=3]
 [ext_resource path="res://Scripts/Menu/Play.gd" type="Script" id=4]
+[ext_resource path="res://Backgrounds/MainScreen/Drone.png" type="Texture" id=5]
+[ext_resource path="res://Backgrounds/MainScreen/Tree.png" type="Texture" id=6]
+[ext_resource path="res://Backgrounds/MainScreen/BigFlower.png" type="Texture" id=7]
+[ext_resource path="res://Backgrounds/MainScreen/Soldier.png" type="Texture" id=9]
+[ext_resource path="res://Backgrounds/MainScreen/Bay.jpg" type="Texture" id=10]
+
+[sub_resource type="AnimatedTexture" id=2]
+flags = 4
+frames = 5
+fps = 1.0
+frame_0/texture = ExtResource( 7 )
+frame_0/delay_sec = 5.0
+frame_1/texture = ExtResource( 5 )
+frame_1/delay_sec = 5.0
+frame_2/texture = ExtResource( 9 )
+frame_2/delay_sec = 5.0
+frame_3/texture = ExtResource( 6 )
+frame_3/delay_sec = 5.0
+frame_4/texture = ExtResource( 10 )
+frame_4/delay_sec = 5.0
 
 [node name="Control" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 
-[node name="CenterContainer" type="CenterContainer" parent="."]
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-margin_left = -512.0
-margin_top = -300.0
-margin_right = 512.0
-margin_bottom = 300.0
-size_flags_stretch_ratio = 1.53
+[node name="Backgrounds" type="MarginContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="TextureRect" type="TextureRect" parent="Backgrounds"]
+self_modulate = Color( 0.686275, 0.686275, 0.686275, 1 )
+margin_right = 1280.0
+margin_bottom = 768.0
+texture = SubResource( 2 )
+expand = true
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="Backgrounds"]
+visible = false
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 anchor_right = 1.0
@@ -29,9 +52,9 @@ margin_right = -20.0
 margin_bottom = -200.0
 
 [node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
-margin_left = 229.0
-margin_right = 755.0
-margin_bottom = 300.0
+margin_left = 357.0
+margin_right = 883.0
+margin_bottom = 468.0
 size_flags_horizontal = 4
 custom_constants/separation = 20
 
@@ -50,9 +73,9 @@ text = "Отвечайте на вопросы"
 
 [node name="VBoxContainer2" type="VBoxContainer" parent="MarginContainer/VBoxContainer"]
 margin_left = 163.0
-margin_top = 150.0
+margin_top = 318.0
 margin_right = 363.0
-margin_bottom = 300.0
+margin_bottom = 468.0
 rect_clip_content = true
 size_flags_horizontal = 4
 size_flags_vertical = 10
