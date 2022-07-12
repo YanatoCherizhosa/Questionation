@@ -17,7 +17,14 @@ config/icon="res://Animations/AnswerButtonIcons/ButtonIcons_Animation 1_0.png"
 
 [autoload]
 
-Global="*res://Scripts/Global.gd"
+Data="*res://Scripts/Data.gd"
+Player="*res://Scripts/Player.gd"
+
+[display]
+
+window/size/width=1280
+window/size/height=768
+window/size/resizable=false
 
 [editor_plugins]
 
