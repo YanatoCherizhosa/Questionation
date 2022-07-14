@@ -7,6 +7,7 @@ var randomAnswers = []
 var currentQuestion
 
 func _ready():
+	soundsForButtons()
 	get_node("CanvasLayer/Pause").visible = false
 	get_node("MarginContainer/TrueAnswers").text = "Правильные ответы: " + str(Player.rightAnswers)
 	print("Player HP global: "+ str(Player.currentHealth))
@@ -101,8 +102,14 @@ func answerButtonPressed():
 			if currentQuestion < randomQuestions.size():
 				randomAnswers.shuffle()
 				CreateQuestion(currentQuestion)
-		
-			
+
+func soundsForButtons():
+	for node in get_tree().get_nodes_in_group("Button"):
+		node.connect("mouse_entered", self, "ButtonEnter")
+
+func ButtonEnter():
+	GlobalSounds.buttonEnter()
+
 func _on_Menu_pressed():
 	get_tree().paused = true
 	get_node("CanvasLayer/Pause").visible = true
