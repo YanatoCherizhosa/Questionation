@@ -6,4 +6,4 @@ func _on_Play_pressed():
 
 
 func _on_Play_mouse_entered():
-	SoundManager.buttonEnter()
+	GlobalSounds.buttonEnter()

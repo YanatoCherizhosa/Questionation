@@ -10,7 +10,6 @@ func _ready():
 	soundsForButtons()
 	get_node("CanvasLayer/Pause").visible = false
 	get_node("MarginContainer/TrueAnswers").text = "Правильные ответы: " + str(Player.rightAnswers)
-	print("Player HP global: "+ str(Player.currentHealth))
 	
 	#load questions if question massive is empty
 	if Data.questionsArray.size() > 0:
@@ -105,25 +104,27 @@ func answerButtonPressed():
 
 func soundsForButtons():
 	for node in get_tree().get_nodes_in_group("Button"):
-		node.connect("mouse_entered", self, "ButtonEnter")
-
-func ButtonEnter():
+		node.connect("mouse_entered", self, "ButtonEntered")
+func ButtonEntered():
 	GlobalSounds.buttonEnter()
 
 func _on_Menu_pressed():
 	get_tree().paused = true
+	GlobalSounds.backgoundMusicSP.volume_db = GlobalSounds.backgroundPausedVolume
 	get_node("CanvasLayer/Pause").visible = true
 	for node in get_tree().get_nodes_in_group("Pause"):
 		node.visible = true
 				
 func _on_Continue_pressed():
 	get_tree().paused = false
+	GlobalSounds.backgoundMusicSP.volume_db = GlobalSounds.backgroundVolume
 	get_node("CanvasLayer/Pause").visible = false
 	for node in get_tree().get_nodes_in_group("AllPause"):
 		node.visible = false
 	
 func _on_Restart_pressed():
 	get_tree().paused = false
+	GlobalSounds.backgoundMusicSP.volume_db = GlobalSounds.backgroundVolume
 	get_node("CanvasLayer/Pause").visible = false
 	for node in get_tree().get_nodes_in_group("AllPause"):
 		node.visible = false
@@ -131,6 +132,7 @@ func _on_Restart_pressed():
 	
 func _on_Exit_pressed():
 	get_tree().paused = false
+	GlobalSounds.backgoundMusicSP.volume_db = GlobalSounds.backgroundVolume
 	for node in get_tree().get_nodes_in_group("AllPause"):
 		node.visible = false
 		Player.currentHealth = 3

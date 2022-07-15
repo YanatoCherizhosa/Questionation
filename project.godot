@@ -20,7 +20,6 @@ config/icon="res://Animations/AnswerButtonIcons/ButtonIcons_Animation 1_0.png"
 Data="*res://Scripts/Data.gd"
 Player="*res://Scripts/Player.gd"
 GlobalSounds="*res://Scenes/GlobalSounds.tscn"
-SoundManager="*res://Scripts/SoundManager.gd"
 
 [display]
 

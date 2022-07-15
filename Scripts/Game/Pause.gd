@@ -4,12 +4,13 @@ var pause_state
 
 func _input(event):
 	if (event.is_action_pressed("ui_cancel") || get_tree().current_scene.pause_mode ):
+		
 		pause_state = not get_tree().paused
-		#if  Player.currentHealth == 0:
-		#	Player.currentHealth = 3
 		if pause_state:
+			GlobalSounds.backgoundMusicSP.volume_db = GlobalSounds.backgroundPausedVolume
 			VisibilityStatus()
 		else:
+			GlobalSounds.backgoundMusicSP.volume_db = GlobalSounds.backgroundVolume
 			pause_state = not get_tree().paused
 			VisibilityStatus()
 			
