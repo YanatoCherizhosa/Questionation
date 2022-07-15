@@ -134,7 +134,7 @@ size_flags_horizontal = 4
 custom_constants/separation = 20
 alignment = 1
 
-[node name="Answer1" type="Button" parent="MarginContainer/VBoxContainer/VBoxAnswers"]
+[node name="Answer1" type="Button" parent="MarginContainer/VBoxContainer/VBoxAnswers" groups=["Button"]]
 margin_right = 350.0
 margin_bottom = 40.0
 rect_min_size = Vector2( 0, 40 )
@@ -152,9 +152,10 @@ anchor_right = 0.921
 anchor_bottom = 0.5
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 texture = ExtResource( 9 )
 
-[node name="Answer2" type="Button" parent="MarginContainer/VBoxContainer/VBoxAnswers"]
+[node name="Answer2" type="Button" parent="MarginContainer/VBoxContainer/VBoxAnswers" groups=["Button"]]
 margin_top = 60.0
 margin_right = 350.0
 margin_bottom = 100.0
@@ -172,9 +173,10 @@ anchor_right = 0.06
 anchor_bottom = 0.5
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 texture = ExtResource( 12 )
 
-[node name="Answer3" type="Button" parent="MarginContainer/VBoxContainer/VBoxAnswers"]
+[node name="Answer3" type="Button" parent="MarginContainer/VBoxContainer/VBoxAnswers" groups=["Button"]]
 margin_top = 120.0
 margin_right = 350.0
 margin_bottom = 160.0
@@ -192,9 +194,10 @@ anchor_right = 0.921
 anchor_bottom = 0.5
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 texture = ExtResource( 10 )
 
-[node name="Answer4" type="Button" parent="MarginContainer/VBoxContainer/VBoxAnswers"]
+[node name="Answer4" type="Button" parent="MarginContainer/VBoxContainer/VBoxAnswers" groups=["Button"]]
 margin_top = 180.0
 margin_right = 350.0
 margin_bottom = 220.0
@@ -212,9 +215,10 @@ anchor_right = 0.06
 anchor_bottom = 0.5
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 texture = ExtResource( 11 )
 
-[node name="Menu" type="Button" parent="MarginContainer"]
+[node name="Menu" type="Button" parent="MarginContainer" groups=["Button"]]
 margin_top = 684.0
 margin_right = 120.0
 margin_bottom = 728.0
@@ -335,7 +339,7 @@ size_flags_horizontal = 4
 size_flags_vertical = 0
 custom_constants/separation = 10
 
-[node name="Continue" type="Button" parent="CanvasLayer/Pause/MarginContainer/Menues/PauseButtons" groups=["AllPause", "Pause"]]
+[node name="Continue" type="Button" parent="CanvasLayer/Pause/MarginContainer/Menues/PauseButtons" groups=["AllPause", "Button", "Pause"]]
 visible = false
 margin_right = 240.0
 margin_bottom = 38.0
@@ -345,7 +349,7 @@ size_flags_horizontal = 4
 custom_fonts/font = ExtResource( 5 )
 text = "Продолжить"
 
-[node name="Restart" type="Button" parent="CanvasLayer/Pause/MarginContainer/Menues/PauseButtons" groups=["AllPause", "Lose", "Pause", "Win"]]
+[node name="Restart" type="Button" parent="CanvasLayer/Pause/MarginContainer/Menues/PauseButtons" groups=["AllPause", "Button", "Lose", "Pause", "Win"]]
 visible = false
 margin_top = 48.0
 margin_right = 240.0
@@ -356,7 +360,7 @@ size_flags_horizontal = 4
 custom_fonts/font = ExtResource( 5 )
 text = "Заново"
 
-[node name="Exit" type="Button" parent="CanvasLayer/Pause/MarginContainer/Menues/PauseButtons" groups=["AllPause", "Lose", "Pause", "Win"]]
+[node name="Exit" type="Button" parent="CanvasLayer/Pause/MarginContainer/Menues/PauseButtons" groups=["AllPause", "Button", "Lose", "Pause", "Win"]]
 visible = false
 margin_top = 96.0
 margin_right = 240.0
