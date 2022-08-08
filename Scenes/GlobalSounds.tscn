@@ -6,4 +6,3 @@
 script = ExtResource( 1 )
 
 [node name="BackgroundMusic" type="AudioStreamPlayer" parent="."]
-pitch_scale = 100.0

@@ -2,12 +2,12 @@
 
 importer="ogg_vorbis"
 type="AudioStreamOGGVorbis"
-path="res://.import/StellarisFasterThanLight.ogg-cd968ee40d3748c1ab7760d8c76423ab.oggstr"
+path="res://.import/stellarisfasterthanlight.ogg-a5c632e9fb3f3012c18b9b594544d079.oggstr"
 
 [deps]
 
-source_file="res://Music/StellarisFasterThanLight.ogg"
-dest_files=[ "res://.import/StellarisFasterThanLight.ogg-cd968ee40d3748c1ab7760d8c76423ab.oggstr" ]
+source_file="res://music/stellarisfasterthanlight.ogg"
+dest_files=[ "res://.import/stellarisfasterthanlight.ogg-a5c632e9fb3f3012c18b9b594544d079.oggstr" ]
 
 [params]
 

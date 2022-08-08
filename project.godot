@@ -31,6 +31,10 @@ window/size/resizable=false
 
 enabled=PoolStringArray( "res://addons/godot-sqlite/plugin.cfg" )
 
+[global]
+
+size=false
+
 [locale]
 
 locale_filter=[ 0, [  ] ]

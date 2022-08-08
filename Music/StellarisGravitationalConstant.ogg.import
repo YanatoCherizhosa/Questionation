@@ -2,12 +2,12 @@
 
 importer="ogg_vorbis"
 type="AudioStreamOGGVorbis"
-path="res://.import/StellarisGravitationalConstant.ogg-13784b05bbec52d83d1e47c5ea975fc3.oggstr"
+path="res://.import/stellarisgravitationalconstant.ogg-401ed82c4cc7fce34b0071105a1dc015.oggstr"
 
 [deps]
 
-source_file="res://Music/StellarisGravitationalConstant.ogg"
-dest_files=[ "res://.import/StellarisGravitationalConstant.ogg-13784b05bbec52d83d1e47c5ea975fc3.oggstr" ]
+source_file="res://music/stellarisgravitationalconstant.ogg"
+dest_files=[ "res://.import/stellarisgravitationalconstant.ogg-401ed82c4cc7fce34b0071105a1dc015.oggstr" ]
 
 [params]
 

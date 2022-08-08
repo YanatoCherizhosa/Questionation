@@ -2,12 +2,12 @@
 
 importer="ogg_vorbis"
 type="AudioStreamOGGVorbis"
-path="res://.import/StellarisDeepSpace.ogg-dac8e1bba81de0615839dad377d93690.oggstr"
+path="res://.import/stellarisdeepspace.ogg-3c85ec46b6e3a3bbcd3ad3468ad13a94.oggstr"
 
 [deps]
 
-source_file="res://Music/StellarisDeepSpace.ogg"
-dest_files=[ "res://.import/StellarisDeepSpace.ogg-dac8e1bba81de0615839dad377d93690.oggstr" ]
+source_file="res://music/stellarisdeepspace.ogg"
+dest_files=[ "res://.import/stellarisdeepspace.ogg-3c85ec46b6e3a3bbcd3ad3468ad13a94.oggstr" ]
 
 [params]
 

@@ -2,12 +2,12 @@
 
 importer="ogg_vorbis"
 type="AudioStreamOGGVorbis"
-path="res://.import/StellarisInSearchOfLife.ogg-d7012eacee53b7671ce648e22c8612f0.oggstr"
+path="res://.import/stellarisinsearchoflife.ogg-b00bffeaa2af2cf2f5f26fc56eac5367.oggstr"
 
 [deps]
 
-source_file="res://Music/StellarisInSearchOfLife.ogg"
-dest_files=[ "res://.import/StellarisInSearchOfLife.ogg-d7012eacee53b7671ce648e22c8612f0.oggstr" ]
+source_file="res://music/stellarisinsearchoflife.ogg"
+dest_files=[ "res://.import/stellarisinsearchoflife.ogg-b00bffeaa2af2cf2f5f26fc56eac5367.oggstr" ]
 
 [params]
 

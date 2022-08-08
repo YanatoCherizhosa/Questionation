@@ -2,12 +2,12 @@
 
 importer="ogg_vorbis"
 type="AudioStreamOGGVorbis"
-path="res://.import/StellarisGenesis.ogg-fbd2db6f74bea43c7e2dc945f6fac9b7.oggstr"
+path="res://.import/stellarisgenesis.ogg-a7d25a65906326e92d18e81aba3c890c.oggstr"
 
 [deps]
 
-source_file="res://Music/StellarisGenesis.ogg"
-dest_files=[ "res://.import/StellarisGenesis.ogg-fbd2db6f74bea43c7e2dc945f6fac9b7.oggstr" ]
+source_file="res://music/stellarisgenesis.ogg"
+dest_files=[ "res://.import/stellarisgenesis.ogg-a7d25a65906326e92d18e81aba3c890c.oggstr" ]
 
 [params]
 

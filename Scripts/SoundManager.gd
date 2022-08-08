@@ -4,7 +4,7 @@ extends Node
 var buttonEnterStream
 
 var musicList = []
-var musicListPath = "res://Music/"
+var musicListPath = "res://music/"
 var currentBackgroundMusic
 var backgoundMusicSP
 var backgroundVolume = 0
@@ -14,31 +14,49 @@ var interfaceVolume = 0
 
 func _ready():
 	backgoundMusicSP = get_node("BackgroundMusic")
-	var dir = Directory.new()
-	if dir.open("res://Music") == OK:
-		dir.list_dir_begin()
-		var file = dir.get_next()
-		while (file != ""):
-			if file.ends_with("ogg"):
-				musicList.append(file)
-			file = dir.get_next()
-	print(musicList)
+#	var dir = Directory.new()
+	#if dir.open("res://music/") == OK:
+#	if dir.open(musicListPath) == OK:
+#		dir.list_dir_begin()
+#		var file = dir.get_next()
+#		while (file != ""):
+#			if file.ends_with("ogg"):
+#				musicList.append(file.get_basename()+".ogg")
+#				#print(file.get_basename())
+#				print(file.get_file())
+#			file = dir.get_next()
+#
+#		if musicList.size() > 0:
+#			print(musicList)
+#		else:
+#			print("Файлы не загружены")
+#	else:
+#		print("Проблемы с открытием папки")
+	
+	musicList.append("stellarisdeepspace.ogg")
+	musicList.append("stellarisfasterthanlight.ogg")
+	musicList.append("stellarisgenesis.ogg")
+	musicList.append("stellarisgravitationalconstant.ogg")
+	musicList.append("stellarisinsearchoflife.ogg")
+	
+#	backgoundMusicSP.set_pause_mode(Node.PAUSE_MODE_PROCESS) 
+#	backgoundMusicSP.stream = load(musicListPath+"stellarisdeepspace.ogg")
+#	print(musicListPath+"stellarisdeepspace.ogg")
+#	backgoundMusicSP.volume_db = backgroundVolume
+#	backgoundMusicSP.play()	
 	BackgroundMusic()
 	
 func BackgroundMusic():
+	print("Size Mlist: "+str(musicList.size()))
 	if musicList.size() > 0:
-		print("Music list size: "+ str(musicList.size()))
 		currentBackgroundMusic = musicList.size()-1
-		#self.add_child(backgoundMusicSP)
 		backgoundMusicSP.set_pause_mode(Node.PAUSE_MODE_PROCESS) 
-		#backgoundMusicSP.connect("finished", self, "PlayNextBackgoundMusic", [currentBackgroundMusic])
 		backgoundMusicSP.connect("finished", self, "PlayNextBackgoundMusic")
-		print("Current soundtrack: #" + str(currentBackgroundMusic+1) + " " + str(musicList[currentBackgroundMusic]))
 		backgoundMusicSP.stream = load(musicListPath+musicList[currentBackgroundMusic-1])
 		backgoundMusicSP.volume_db = backgroundVolume
 		backgoundMusicSP.play()
 	else:
-		print("Error")
+		print("Ошибка воспроизведения")
 	
 func PlayNextBackgoundMusic():
 	if currentBackgroundMusic <= 0:
@@ -49,20 +67,6 @@ func PlayNextBackgoundMusic():
 		currentBackgroundMusic-=1
 		backgoundMusicSP.stream = load(musicListPath+musicList[currentBackgroundMusic])
 		backgoundMusicSP.play()
-	print("Current soundtrack: #" + str(currentBackgroundMusic+1) + " " + str(musicList[currentBackgroundMusic]))
-#func PlayNextBackgoundMusic(var currentBackgroundMusic):
-#	currentBackgroundMusic = currentBackgroundMusic - 1
-#	if currentBackgroundMusic < 0:
-#		currentBackgroundMusic = musicList.size()-1
-#	else:
-#		backgoundMusicSP.connect("finished", self, "PlayNextBackgoundMusic", [currentBackgroundMusic])
-#		print("Current soundtrack: #" + str(currentBackgroundMusic+1) + " " + str(musicList[currentBackgroundMusic]))
-#		backgoundMusicSP.stream = load("res://Music/"+musicList[currentBackgroundMusic-1])
-#		backgoundMusicSP.volume_db = backgroundVolume
-#		backgoundMusicSP.play()
-#		print("3: "+str(currentBackgroundMusic))
-#
-#		backgoundMusicSP.connect("finished", self, "PlayNextBackgoundMusic", [currentBackgroundMusic])
 
 func ShortSoundPlayOnce(var path):
 	var shortSoundSP = AudioStreamPlayer.new()
